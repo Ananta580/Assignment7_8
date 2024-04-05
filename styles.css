@@ -49,6 +49,15 @@
   width: 100px;
   height: 100px;
   margin: 10px;
+  transition: transform 0.5s ease;
+}
+
+.dice.shrink {
+  transform: scale(0.5);
+}
+
+.dice.expand {
+  transform: scale(1);
 }
 
 #rollBtn {

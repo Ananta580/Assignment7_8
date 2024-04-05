@@ -12,17 +12,33 @@ var winningScore = 20;
 
 initializeScore();
 
+// Function that initialize score
 function initializeScore() {
   document.getElementById("winningScore").innerText = `"${winningScore}"`;
   document.getElementById("winningScoreInput").value = winningScore;
 }
 
+// Function that handle roll of dice
 function rollDice() {
   const dice1Value = Math.floor(Math.random() * 6) + 1;
   const dice2Value = Math.floor(Math.random() * 6) + 1;
+  document.getElementById("dice1").classList.add("shrink");
+  document.getElementById("dice2").classList.add("shrink");
 
-  document.getElementById("dice1").src = diceImages[dice1Value - 1];
-  document.getElementById("dice2").src = diceImages[dice2Value - 1];
+  setTimeout(() => {
+    document.getElementById("dice1").src = diceImages[dice1Value - 1];
+    document.getElementById("dice2").src = diceImages[dice2Value - 1];
+
+    document.getElementById("dice1").classList.remove("shrink");
+    document.getElementById("dice2").classList.remove("shrink");
+    document.getElementById("dice1").classList.add("expand");
+    document.getElementById("dice2").classList.add("expand");
+
+    setTimeout(() => {
+      document.getElementById("dice1").classList.remove("expand");
+      document.getElementById("dice2").classList.remove("expand");
+    }, 500);
+  }, 500);
 
   const scoreDiff = Math.abs(dice1Value - dice2Value);
   if (dice1Value > dice2Value) {
@@ -37,6 +53,7 @@ function rollDice() {
   checkWinner();
 }
 
+// Function that check winner
 function checkWinner() {
   if (player1Score >= winningScore) {
     alert("Player 1 wins!");
@@ -47,6 +64,7 @@ function checkWinner() {
   }
 }
 
+// Function that reset game after winning
 function resetGame() {
   player1Score = 0;
   player2Score = 0;
